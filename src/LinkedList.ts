@@ -1,4 +1,7 @@
-import { Node } from "./Node"
+interface Node<T> {
+    element: T,
+    next: Node<T> | null,
+}
 
 export class LinkedList<T> {
 
@@ -10,18 +13,32 @@ export class LinkedList<T> {
         this._size = 0
     }
 
-    get head() {
+    get first(): T | null {
         if (this._head === null) {
             return null
         }
         return this._head.element
     }
 
+    get last(): T | null {
+        let current = this._head
+        if (current === null) {
+            return null
+        }
+        for (; current.next !== null; current = current.next) {
+        }
+        return current.element
+    }
+
     get size() {
         return this._size
     }
 
-    addFirst(element: T) {
+    isEmpty(): boolean {
+        return this._head === null
+    }
+
+    addFirst(element: T): void {
         this._head = {
             element,
             next: this._head
@@ -29,7 +46,22 @@ export class LinkedList<T> {
         this._size++
     }
 
-    removeFirst() {
+    addLast(element: T): void {
+        const newNode = {
+            element,
+            next: null
+        }
+        let current = this._head
+        if (current === null) {
+            this._head = newNode
+            return
+        }
+        for (; current.next !== null; current = current.next) {
+        }
+        current.next = newNode
+    }
+
+    removeFirst(): T {
         if (this._head === null) {
             throw new Error("list is empty")
         }

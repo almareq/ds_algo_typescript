@@ -9,7 +9,7 @@ export class Stack<T> {
     }
 
     top() {
-        return this.list.head
+        return this.list.first
     }
 
     push(element: T) {
