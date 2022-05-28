@@ -1,30 +1,30 @@
 interface Node<T> {
-    element: T,
+    element: T | null,
     next: Node<T> | null,
 }
 
 export class LinkedList<T> {
 
-    private _head: Node<T> | null
+    private readonly header: Node<T>
     private _size: number
 
     constructor() {
-        this._head = null
+        this.header = {
+            element: null,
+            next: null
+        }
         this._size = 0
     }
 
     get first(): T | null {
-        if (this._head === null) {
+        if (this.header.next === null) {
             return null
         }
-        return this._head.element
+        return this.header.next.element
     }
 
     get last(): T | null {
-        let current = this._head
-        if (current === null) {
-            return null
-        }
+        let current = this.header
         for (; current.next !== null; current = current.next) {
         }
         return current.element
@@ -35,13 +35,13 @@ export class LinkedList<T> {
     }
 
     isEmpty(): boolean {
-        return this._head === null
+        return this._size === 0
     }
 
     addFirst(element: T): void {
-        this._head = {
+        this.header.next = {
             element,
-            next: this._head
+            next: this.header.next
         }
         this._size++
     }
@@ -51,22 +51,18 @@ export class LinkedList<T> {
             element,
             next: null
         }
-        let current = this._head
-        if (current === null) {
-            this._head = newNode
-            return
-        }
+        let current = this.header
         for (; current.next !== null; current = current.next) {
         }
         current.next = newNode
     }
 
-    removeFirst(): T {
-        if (this._head === null) {
+    removeFirst(): T | null {
+        if (this.header.next === null) {
             throw new Error("list is empty")
         }
-        const head = this._head
-        this._head = head.next
+        const head = this.header.next
+        this.header.next = head.next
         this._size--
         return head.element
     }
