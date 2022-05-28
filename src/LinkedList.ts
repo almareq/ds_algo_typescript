@@ -5,32 +5,29 @@ interface Node<T> {
 
 export class LinkedList<T> {
 
-    private readonly header: Node<T>
-    private _size: number
+    private tail: Node<T> | null = null
+    private _size: number = 0
 
     constructor() {
-        this.header = {
-            element: null,
-            next: null
-        }
+        this.tail = null
         this._size = 0
     }
 
     get first(): T | null {
-        if (this.header.next === null) {
+        if (this.tail === null || this.tail.next === null) {
             return null
         }
-        return this.header.next.element
+        return this.tail.next.element
     }
 
     get last(): T | null {
-        let current = this.header
-        for (; current.next !== null; current = current.next) {
+        if (this.tail === null) {
+            return null
         }
-        return current.element
+        return this.tail.element
     }
 
-    get size() {
+    get size(): number {
         return this._size
     }
 
@@ -39,31 +36,46 @@ export class LinkedList<T> {
     }
 
     addFirst(element: T): void {
-        this.header.next = {
-            element,
-            next: this.header.next
-        }
         this._size++
+        if (this.tail === null) {
+            this.tail = {
+                element,
+                next: null
+            }
+            this.tail.next = this.tail
+            return
+        }
+        this.tail.next = {
+            element,
+            next: this.tail.next
+        }
     }
 
     addLast(element: T): void {
-        const newNode = {
-            element,
-            next: null
+        this.addFirst(element)
+        if (this.tail === null) {
+            return
         }
-        let current = this.header
-        for (; current.next !== null; current = current.next) {
-        }
-        current.next = newNode
+        this.tail = this.tail.next
     }
 
     removeFirst(): T | null {
-        if (this.header.next === null) {
+        if (this.tail === null || this.tail.next === null) {
             throw new Error("list is empty")
         }
-        const head = this.header.next
-        this.header.next = head.next
         this._size--
-        return head.element
+        const first = this.tail.next
+        if (first === this.tail) {
+            this.tail = null
+            return first.element
+        }
+        this.tail.next = this.tail.next.next
+        return first.element
+    }
+
+    rotate(): void {
+        if (this.tail !== null) {
+            this.tail = this.tail.next
+        }
     }
 }
