@@ -1,11 +1,11 @@
-import { LinkedList } from "./LinkedList"
+import {CircularLinkedList} from "./CircularLinkedList"
 
 export class Stack<T> {
 
-    private list: LinkedList<T>
+    private list: CircularLinkedList<T>
 
     constructor() {
-        this.list = new LinkedList()
+        this.list = new CircularLinkedList()
     }
 
     top() {

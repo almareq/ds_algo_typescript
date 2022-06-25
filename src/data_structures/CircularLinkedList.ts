@@ -3,7 +3,7 @@ interface Node<T> {
     next: Node<T> | null,
 }
 
-export class LinkedList<T> {
+export class CircularLinkedList<T> {
 
     private tail: Node<T> | null = null
     private _size: number = 0

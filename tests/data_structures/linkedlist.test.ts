@@ -1,10 +1,10 @@
-import {LinkedList} from "../../src/data_structures/LinkedList";
+import {CircularLinkedList} from "../../src/data_structures/CircularLinkedList";
 
-describe('linked list test', () => {
-    let linkedList: LinkedList<string>
+describe('circular linked list test', () => {
+    let linkedList: CircularLinkedList<string>
 
     beforeEach(() => {
-        linkedList = new LinkedList();
+        linkedList = new CircularLinkedList();
     })
 
     it('should add an item first', () => {
@@ -29,19 +29,13 @@ describe('linked list test', () => {
     })
 
     it('should give me the last element', () => {
-        linkedList.addFirst("salmon")
-        linkedList.addFirst("potato")
-        expect(linkedList.last).toBe("salmon")
-    })
-
-    it('should give me the last element', () => {
         linkedList.addFirst("potatos")
         linkedList.addFirst("salmon")
         linkedList.addFirst("tuna")
         expect(linkedList.last).toBe("potatos")
     })
 
-    it('should give the same element for last and first for 1 element list', () => {
+    it('should give the same element for last and first with just 1 element', () => {
         linkedList.addFirst("potatos")
         expect(linkedList.last).toBe("potatos")
         expect(linkedList.last).toBe(linkedList.first)
@@ -49,11 +43,6 @@ describe('linked list test', () => {
 
     it('should add an element last', () => {
         linkedList.addLast("salmon")
-        linkedList.addLast("potato")
-        expect(linkedList.last).toBe("potato")
-    })
-
-    it('should add an element last', () => {
         linkedList.addLast("potato")
         expect(linkedList.last).toBe("potato")
     })
