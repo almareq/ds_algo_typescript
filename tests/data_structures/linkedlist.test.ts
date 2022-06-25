@@ -1,4 +1,4 @@
-import { LinkedList } from "../src/LinkedList";
+import {LinkedList} from "../../src/data_structures/LinkedList";
 
 describe('linked list test', () => {
     let linkedList: LinkedList<string>

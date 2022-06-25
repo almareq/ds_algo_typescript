@@ -1,4 +1,4 @@
-import {sort} from "../../src/exercises/insertionSort";
+import {sort} from "../../src/algorithms/insertionSort";
 
 describe('test insertion sort', () => {
     it('should return the same array if it is already ordered', () => {

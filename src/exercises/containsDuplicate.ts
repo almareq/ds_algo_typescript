@@ -1,4 +1,4 @@
-import {sort} from "./insertionSort";
+import {sort} from "../algorithms/insertionSort";
 
 export function containsDuplicate(numbers: number[]): boolean {
 
